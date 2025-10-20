@@ -1,28 +1,29 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 2
+Topik: week2-cryptosystem  
+Nama: Putri Tripangesti 
+NIM: 230320558  
+Kelas: 5DSRA
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Mengidentifikasi komponen dasar kriptosistem (plaintext, ciphertext, kunci, algoritma).  
+2. Menggambarkan proses enkripsi dan dekripsi sederhana.  
+3. Mengklasifikasikan jenis kriptosistem (simetris dan asimetris). 
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Cipher klasik adalah metode penyandian pesan yang digunakan sebelum berkembangnya kriptografi modern berbasis komputer. Prinsip utamanya adalah mengubah susunan huruf dalam teks asli (plaintext) menjadi teks sandi (ciphertext) dengan aturan tertentu agar maknanya tersembunyi dari pihak yang tidak berwenang. Beberapa contoh cipher klasik yang terkenal antara lain Caesar Cipher, Vigenère Cipher, dan Transposition Cipher. Meskipun sederhana, metode ini menjadi dasar penting dalam memahami konsep keamanan data karena memperkenalkan ide substitusi (penggantian karakter) dan transposisi (penyusunan ulang karakter).
+
+Konsep modular aritmetika berperan penting dalam sistem cipher klasik, terutama pada jenis substitusi seperti Caesar Cipher. Dalam aritmetika modular, operasi dilakukan dengan sisa hasil pembagian terhadap suatu bilangan tertentu yang disebut modulus. Misalnya, jika menggunakan alfabet dengan 26 huruf, maka perhitungan dilakukan dengan modulus 26, sehingga setelah huruf “Z” operasi kembali ke huruf “A”. Prinsip ini memungkinkan proses enkripsi dan dekripsi berjalan secara teratur dan konsisten, serta menjadi fondasi bagi berbagai algoritma kriptografi modern yang lebih kompleks.
 
 ---
 
 ## 3. Alat dan Bahan
-(- Python 3.x  
-- Visual Studio Code / editor lain  
+- Visual Studio Code 
 - Git dan akun GitHub  
-- Library tambahan (misalnya pycryptodome, jika diperlukan)  )
 
 ---
 
@@ -36,42 +37,78 @@ Contoh format:
 ---
 
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
+def caesar_encrypt(plaintext, key):
+    result = ""
+    for char in plaintext:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            result += chr((ord(char) - shift + key) % 26 + shift)
+        else:
+            result += char
+    return result
 
-```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
-```
-)
+def caesar_decrypt(ciphertext, key):
+    return caesar_encrypt(ciphertext, -key)
+
+# Input dari pengguna
+msg = input("Masukkan teks yang ingin dienkripsi: ")
+key = int(input("Masukkan kunci (angka): "))
+
+# Enkripsi
+enc = caesar_encrypt(msg, key)
+# Dekripsi
+dec = caesar_decrypt(enc, key)
+
+# Output
+print("\n=== HASIL ===")
+print("Plaintext  :", msg)
+print("Ciphertext :", enc)
+print("Decrypted  :", dec)
 
 ---
 
 ## 6. Hasil dan Pembahasan
-(- Lampirkan screenshot hasil eksekusi program (taruh di folder `screenshots/`).  
-- Berikan tabel atau ringkasan hasil uji jika diperlukan.  
-- Jelaskan apakah hasil sesuai ekspektasi.  
-- Bahas error (jika ada) dan solusinya. 
-
 Hasil eksekusi program Caesar Cipher:
 
 ![Hasil Eksekusi](screenshots/output.png)
 ![Hasil Input](screenshots/input.png)
 ![Hasil Output](screenshots/output.png)
-)
+
+Penjelasan Hasil: 
+Plaintext: Cryptosystem Test
+Kunci: 3
+Ciphertext: Hwduytxdxyjr Yjxy
+            → Setiap huruf digeser 5 posisi ke kanan dalam alfabet (contoh: C→H, R→W, Y→D, P→U).
+Decrypted: Cryptosystem Test
+            → Teks berhasil dikembalikan ke bentuk semula dengan kunci yang sama.
+Artinya: Proses enkripsi dan dekripsi bekerja sesuai teori Caesar Cipher, hasilnya sesuai ekspektasi.
 
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+1. Sebutkan komponen utama dalam sebuah kriptosistem.  
+    Sebuah kriptosistem (cryptosystem) umumnya terdiri dari lima komponen utama:
+
+    1. Plaintext (Teks asli) — Pesan atau data asli yang ingin dikirim secara rahasia.
+    2. Ciphertext (Teks sandi) — Hasil dari proses enkripsi yang sudah tidak dapat dibaca secara langsung.
+    3. Encryption Algorithm (Algoritma enkripsi) — Proses atau fungsi matematika yang mengubah plaintext menjadi   ciphertext menggunakan kunci tertentu.
+    4. Decryption Algorithm (Algoritma dekripsi) — Proses kebalikan dari enkripsi, yang mengubah ciphertext kembali menjadi plaintext.
+    5. Key (Kunci) — Nilai rahasia yang digunakan dalam proses enkripsi dan dekripsi. Tanpa kunci yang benar, pesan tidak dapat dibuka.
+
+2. Apa kelebihan dan kelemahan sistem simetris dibandingkan asimetris?  
+    - Kelebihan Sistem Simetris: Proses enkripsi dan dekripsi lebih cepat, lebih efisien untuk data dalam jumlah besar.
+    - Kelebihan Sistem Asimetris: Tidak perlu berbagi kunci rahasia secara langsung, mendukung tanda tangan digital dan otentikasi.
+
+    - Kelemahan Sistem Simetris: Distribusi kunci sulit, karena pengirim dan penerima harus memiliki kunci yang sama dan menjaganya tetap rahasia, kurang aman jika kunci diketahui pihak lain.
+    - Kelemahan Sistem Asimetris: Proses lebih lambat karena operasi matematis yang kompleks, lebih boros sumber daya untuk data besar.
+
+3. Mengapa distribusi kunci menjadi masalah utama dalam kriptografi simetris?
+    Dalam kriptografi simetris, pengirim dan penerima menggunakan kunci yang sama untuk mengenkripsi dan mendekripsi pesan.
+    Masalah muncul karena: Kunci harus dibagikan terlebih dahulu sebelum komunikasi dimulai. Jika kunci dikirim melalui saluran komunikasi yang tidak aman, pihak ketiga bisa mencegatnya dan membaca seluruh pesan. Semakin banyak pengguna yang terlibat, semakin banyak pasangan kunci yang harus dijaga dan didistribusikan, sehingga manajemennya menjadi rumit.
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Program Caesar Cipher berhasil mengenkripsi dan mendekripsi teks dengan benar menggunakan pergeseran huruf sebanyak 5. Hasil dekripsi identik dengan plaintext awal, sehingga dapat disimpulkan bahwa implementasi algoritma Caesar Cipher ini berfungsi sesuai teori dan ekspektasi.
 
 ---
 
@@ -87,9 +124,9 @@ Contoh:
 (Tuliskan bukti commit Git yang relevan.  
 Contoh:
 ```
-commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+commit week2-cryptosystem
+Author: Putri Tripangesti <putritpgst@gmail.com>
+Date:   2025-10-20
 
     week2-cryptosystem: implementasi Caesar Cipher dan laporan )
 ```
