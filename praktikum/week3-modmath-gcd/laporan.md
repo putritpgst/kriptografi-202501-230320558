@@ -168,12 +168,8 @@ Contoh:
 ---
 
 ## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
-```
 commit modular_math
 Author: Putri Tripangesti <putritpgst@gmail.com>
 Date:   2025-10-28
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
-```
+    week3-modmath-gcd: implementasi Modular Math dan laporan 
