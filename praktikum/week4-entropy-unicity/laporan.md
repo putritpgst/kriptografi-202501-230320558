@@ -110,6 +110,7 @@ Ya, sangat sesuai ekspektasi. Penjelasan singkat:
 4. AES-128 tak terjangkau oleh brute-force praktis.
     Entropi 128 bit menghasilkan ruang kunci astronomis. Hasil konversi (~2.95×10²⁴ tahun dengan 1e6 percobaan/s) menegaskan bahwa brute-force pada AES-128 tidak realistis dengan teknologi saat ini. Ini juga sesuai ekspektasi teori kriptografi modern — 128-bit entropi dianggap aman untuk brute-force.
 
+
 Catatan penting & sensitivitas hasil:
 1. Kecepatan percobaan (attempts_per_second) sangat menentukan waktu brute-force. Jika menggunakan hardware khusus (ASIC/FPGAs) atau cluster besar, waktu menurun, tapi untuk AES-128 masih tetap astronomis.
 
@@ -151,8 +152,8 @@ Contoh:
 ---
 
 ## 10. Commit Log
-commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+commit week4-entropy-unicity
+Author: Putri Tripangesti <putritpgst@gmail.com>
+Date:   2025-10-28
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan
+    week4-entropy-unicity: implementasi Entropy Unicity dan laporan
